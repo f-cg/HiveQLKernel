@@ -208,7 +208,10 @@ class HiveQLKernel(Kernel):
                 logger.info("Running the following HiveQL query: {}".format(query))
                 start = time.time()
                 result = self.last_conn.execute(query.strip())
-                res = result.cursor.fetch_logs()
+                if result.cursor is not None:
+                    res = result.cursor.fetch_logs()
+                else:
+                    res = ""
                 if len(res) > 0:
                     raise Exception("\n".join(res))
                 end = time.time()
