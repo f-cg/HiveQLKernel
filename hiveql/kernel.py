@@ -213,7 +213,7 @@ class HiveQLKernel(Kernel):
                 else:
                     res = ""
                 if len(res) > 0:
-                    raise Exception("\n".join(res))
+                    self.send_error("\n".join(res))
                 end = time.time()
                 elapsed_time = self.format_time(start, end)
                 if result is not None and result.returns_rows is True:
